@@ -1,25 +1,25 @@
 import { SandpackCodeEditor, SandpackLayout, SandpackPreview, SandpackProvider } from '@codesandbox/sandpack-react'
 import React, { useState } from 'react'
 
-import { amethyst } from '@codesandbox/sandpack-themes'
+import { amethyst, ecoLight } from '@codesandbox/sandpack-themes'
 
 const SandpackContent = () => {
 
   const [preview, setPreview] = useState("code")
   return (
-    <div>
+    <div className='px-[1rem] mt-[0.5rem]'>
       <div className='flex gap-5'>
         {["code", "preview"].map((btn) => (
           <button
             key={btn}
             onClick={() => setPreview(btn)}
-            className="text-white mb-2 ml-3"
+            className="text-white mb-[1rem] ml-3"
           >
             {btn}
           </button>
         ))}
       </div>
-      <SandpackProvider theme={amethyst} options={{
+      <SandpackProvider theme={ecoLight} options={{
         autorun: true,
       }}>
         <SandpackLayout>
