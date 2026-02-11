@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BsStars } from 'react-icons/bs';
 import Select from 'react-select';
 import { generateComponent } from '../services/generateComponent';
+import { toast } from 'react-toastify';
 
 const options = [
   { value: 'html-css', label: 'HTML + CSS' },
@@ -22,7 +23,7 @@ const PromptContent = ({ setFiles, setTemplate }) => {
     if (loading) return;
 
     if (!prompt.trim()) {
-      alert("Write a prompt bro 🙂");
+      toast.error("Please enter the prompt first")
       return;
     }
 
@@ -42,7 +43,7 @@ const PromptContent = ({ setFiles, setTemplate }) => {
 
     } catch (error) {
       console.error(error)
-      alert(error.message || "Failed to generate component")
+     toast.error(error)
     }
     finally {
       setLoading(false)
