@@ -7,30 +7,42 @@ const Home = () => {
 
   const defaultCode = `export default function App() {
   return (
-    <div className="bg-gray-50">
-      <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block">Ready to dive in?</span>
-          <span className="block text-indigo-600">Start your free trial today.</span>
-        </h2>
-        <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-          <div className="inline-flex rounded-md shadow">
-            <a
-              href="#"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:bg-indigo-700"
-            >
-              Get started
-            </a>
-          </div>
-          <div className="ml-3 inline-flex rounded-md shadow">
-            <a
-              href="#"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600 hover:bg-indigo-50"
-            >
-              Learn more
-            </a>
-          </div>
+    <div className="min-h-screen bg-[#0b0f19] flex items-center justify-center px-6">
+      
+      {/* Glow background */}
+      <div className="absolute w-[500px] h-[500px] bg-indigo-600/30 blur-[140px] rounded-full top-[-100px] left-[-100px]" />
+      <div className="absolute w-[400px] h-[400px] bg-purple-600/20 blur-[120px] rounded-full bottom-[-120px] right-[-80px]" />
+
+      {/* Card */}
+      <div className="relative max-w-4xl w-full backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-10 shadow-2xl">
+
+        <h1 className="text-5xl font-semibold text-white leading-tight">
+          Build beautiful components  
+          <span className="block bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            in seconds.
+          </span>
+        </h1>
+
+        <p className="mt-6 text-gray-300 text-lg max-w-2xl">
+          Describe your UI, choose a framework, and watch production-ready code
+          appear instantly. No setup. No boilerplate. Just creation.
+        </p>
+
+        <div className="mt-10 flex gap-4">
+          <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium shadow-lg hover:scale-105 transition">
+            Generate Component
+          </button>
+
+          <button className="px-6 py-3 rounded-xl border border-white/20 text-white hover:bg-white/10 transition">
+            See Demo
+          </button>
         </div>
+
+        {/* bottom badge */}
+        <div className="mt-10 text-sm text-gray-400">
+          ⚡ Powered by AI — React, Tailwind, HTML & more
+        </div>
+
       </div>
     </div>
   )
@@ -49,7 +61,7 @@ const Home = () => {
       <div className='flex justify-between mt-10 gap-[2rem] px-[3rem]'>
         {/* For left side Prompt */}
         <div className='bg-red-500 w-[40%] h-[75vh] rounded-2xl'>
-          <PromptContent setFiles={setFiles} setTemplate = {setTemplate} />
+          <PromptContent setFiles={setFiles} setTemplate={setTemplate} />
         </div>
 
         {/* For the right side code editor and preview */}
