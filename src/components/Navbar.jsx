@@ -5,15 +5,12 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full 
-border-b border-white/5 
-bg-[#0B0B0B]/80 
-backdrop-blur-xl">
-      
+    <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#0B0B0B]/80 backdrop-blur-xl">
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
+
         <div className="flex h-14 items-center justify-between">
-          
+
           {/* LEFT */}
           <div className="flex items-center gap-2 sm:gap-3 cursor-pointer">
             <img
@@ -29,16 +26,25 @@ backdrop-blur-xl">
 
           {/* DESKTOP NAV */}
           <nav className="hidden md:flex items-center gap-6 lg:gap-8">
-            
-            <a className="text-sm text-[#A1A1A1] hover:text-white transition-colors">
+
+            <a
+              href="https://github.com/abhishekpandey-001/ForgeUI#readme"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-[#A1A1A1] hover:text-white transition-colors">
               Docs
             </a>
 
-            <a className="text-sm text-[#A1A1A1] hover:text-white transition-colors">
+            <a
+              href="https://github.com/abhishekpandey-001/ForgeUI"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-[#A1A1A1] hover:text-white transition-colors">
               GitHub
             </a>
 
             <button
+              href="/app"
               className="
                 rounded-lg
                 bg-[#FF8A00]
@@ -70,16 +76,34 @@ backdrop-blur-xl">
       {open && (
         <div className="md:hidden border-t border-white/5 bg-[#0B0B0B]">
           <div className="flex flex-col gap-4 px-6 py-4">
-            
-            <a className="text-sm text-[#A1A1A1] hover:text-white">
+
+            <a
+              href="https://github.com/abhishekpandey-001/ForgeUI#readme"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="text-sm text-[#A1A1A1] hover:text-white"
+            >
               Docs
             </a>
 
-            <a className="text-sm text-[#A1A1A1] hover:text-white">
+            <a
+              href="https://github.com/abhishekpandey-001/ForgeUI"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="text-sm text-[#A1A1A1] hover:text-white"
+            >
               GitHub
             </a>
 
-            <button className="rounded-lg bg-[#FF8A00] py-2 text-sm font-semibold text-white">
+            <button
+              onClick={() => setOpen(!open)}
+              className="md:hidden text-white"
+              aria-label="Toggle menu"
+              aria-expanded={open}
+              href="/app"
+            >
               Launch App
             </button>
 
