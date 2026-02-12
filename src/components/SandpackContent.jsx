@@ -1,15 +1,14 @@
 import { SandpackCodeEditor, SandpackLayout, SandpackPreview, SandpackProvider } from '@codesandbox/sandpack-react'
 import React, { useState } from 'react'
-import { Copy } from "lucide-react";
+import { Copy, Download } from "lucide-react";
 import { toast } from 'react-toastify';
-import { CiExport } from "react-icons/ci";
 
-import { amethyst, ecoLight } from '@codesandbox/sandpack-themes'
 
 const SandpackContent = ({ files, template }) => {
 
   const [preview, setPreview] = useState("preview")
   const [copied, setCopied] = useState(false);
+  const [downloaded, setDownloaded] = useState(false);
 
   //LLogic to copy the code
   const handleCopy = async () => {
@@ -46,54 +45,94 @@ const SandpackContent = ({ files, template }) => {
 
     URL.revokeObjectURL(url);
 
+    setDownloaded(true);
+    setTimeout(() => setDownloaded(false), 1500);
+
     toast.success("File downloaded 🚀");
   };
 
   return (
-    <div className='px-[1rem] mt-[0.5rem]'>
-      <div className='flex gap-5'>
-        {["code", "preview"].map((btn) => (
+    <div className='space-y-4'>
+      <div className="flex items-center justify-between border-b border-white/5 pb-3">
+
+        {/* LEFT SIDE - Tabs */}
+        <div className="flex items-center gap-3">
+          {["code", "preview"].map((btn) => (
+            <button
+              key={btn}
+              onClick={() => setPreview(btn)}
+              className={`
+          px-3 py-1.5 rounded-lg text-sm capitalize transition
+          ${preview === btn
+                  ? "bg-[#FF8A00] text-black font-medium"
+                  : "text-[#A1A1A1] hover:text-white hover:bg-white/5"}
+        `}
+            >
+              {btn}
+            </button>
+          ))}
+        </div>
+
+        {/* RIGHT SIDE - Actions */}
+        <div className="flex items-center gap-2">
           <button
-            key={btn}
-            onClick={() => setPreview(btn)}
-            className="text-white mb-[1rem] ml-3"
+            className="group p-2 rounded-lg hover:bg-white/5 transition-all"
+            onClick={handleCopy}
           >
-            {btn}
+            <Copy
+              size={18}
+              className={`text-[#A1A1A1] transition-all duration-200
+        ${copied
+                  ? "scale-125 text-green-500"
+                  : "group-hover:scale-125 group-hover:text-white"}`}
+            />
           </button>
-        ))}
 
-        <button className="group p-2 rounded-lg hover:bg-gray-200 transition-all" onClick={handleCopy}>
-          <Copy
-            size={18}
-            className={`transition-all duration-200 
-            ${copied ? "scale-125 text-green-500" : "group-hover:scale-125"}`}
-          />
-        </button>
-
-        <button onClick={downloadFile}
-          className="group p-2 rounded-lg hover:bg-gray-200 transition-all">
-          <CiExport className="group-hover:scale-125 transition-all"/>
-        </button>
-
+          <button
+            onClick={downloadFile}
+            className="group p-2 rounded-lg hover:bg-white/5 transition-all"
+          >
+            <Download
+              size={18}
+              className={`text-[#A1A1A1] transition-all duration-200
+        ${downloaded
+                  ? "scale-125 text-green-500"
+                  : "group-hover:scale-125 group-hover:text-white"}`}
+            />
+          </button>
+        </div>
 
       </div>
-      <SandpackProvider theme={ecoLight} options={{
+      <SandpackProvider theme={'dark'} options={{
         autorun: true,
         externalResources: ["https://cdn.tailwindcss.com"],
         recompileMode: 'immediate'
       }}
         template={template} files={files}>
-        <SandpackLayout>
-          <div className={preview === "code" ? "block w-full" : "hidden"}>
-            <SandpackCodeEditor showLineNumbers showTabs wrapContent style={{
-              height: 480,
-            }} />
-          </div>
+        <SandpackLayout className="overflow-hidden">
+          <div className="relative w-full h-[418px]">
 
-          <div className={preview === "preview" ? "block w-full" : "hidden"}>
-            <SandpackPreview className='rounded-2xl' style={{
-              height: 480,
-            }} />
+            <div
+              className={`absolute inset-0 ${preview === "code" ? "opacity-100" : "opacity-0 pointer-events-none"
+                } transition-opacity duration-150`}
+            >
+              <SandpackCodeEditor
+                showLineNumbers
+                showTabs
+                wrapContent
+                className="h-full"
+              />
+            </div>
+
+            <div
+              className={`absolute inset-0 ${preview === "preview" ? "opacity-100" : "opacity-0 pointer-events-none"
+                } transition-opacity duration-150`}
+            >
+              <SandpackPreview
+                className="h-full rounded-lg overflow-hidden bg-[#0B0B0B]"
+              />
+            </div>
+
           </div>
         </SandpackLayout>
       </SandpackProvider>
