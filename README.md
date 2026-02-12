@@ -8,8 +8,6 @@ ForgeUI is an intelligent component generator that leverages Google's Gemini 2.5
 
 ![alt text](image.png)
 
-> *Add a screenshot of your application here to show users what it looks like!*
-
 ## ✨ Features
 
 -   **🤖 AI-Powered Generation**: Utilizes Google's advanced Gemini 2.5 Flash model to understand natural language prompts and generate high-quality code.
